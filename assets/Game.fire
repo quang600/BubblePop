@@ -2277,7 +2277,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 157.34,
+      "width": 192.87,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -2329,8 +2329,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "加载中...",
-    "_N$string": "加载中...",
+    "_string": "Loading...",
+    "_N$string": "Loading...",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
