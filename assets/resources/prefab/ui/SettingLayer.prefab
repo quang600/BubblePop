@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 279.64,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -456,8 +456,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "游戏设置",
-    "_N$string": "游戏设置",
+    "_string": "Game settings",
+    "_N$string": "Game settings",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1823,7 +1823,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 279.64,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -1875,8 +1875,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "游戏设置",
-    "_N$string": "游戏设置",
+    "_string": "Game settings",
+    "_N$string": "Game settings",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,

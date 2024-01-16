@@ -9,68 +9,68 @@ import ToastManager from "../manager/ToastManager";
 import { StaticInstance } from "../StaticInstance";
 import BaseLayer from "./Baselayer";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class RewardLayer extends BaseLayer {
 
     @property(cc.Node)
     styleNode: cc.Node = null
- 
-    onCloseClick(e: any){
+
+    onCloseClick(e: any) {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         this.hide()
     }
 
-    setStyle(i: number){
-        this.styleNode.children.forEach((style, index)=>{
+    setStyle(i: number) {
+        this.styleNode.children.forEach((style, index) => {
             style.active = i === index
         })
         const style: cc.Node = this.styleNode.children[i]
         this.fadeIn(style)
     }
 
-    onIceSkillClick(){
+    onIceSkillClick() {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        if(DataManager.instance.skillNums[0] <= 0){
-            ToastManager.instance.show('技能点不足, 请先获取', {gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255)})
+        if (DataManager.instance.skillNums[0] <= 0) {
+            ToastManager.instance.show('Insufficient skills, Please get first', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
             return
         }
         this.hide()
         EventManager.instance.emit(ENUM_GAME_EVENT.ITEM_ICE_START)
     }
 
-    onIcelRewardClick(){
+    onIcelRewardClick() {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        SdkManager.instance.showVideoAd(()=>{
+        SdkManager.instance.showVideoAd(() => {
             DataManager.instance.skillNums[0] += 1
             DataManager.instance.save()
             StaticInstance.uiManager.setMainPropNum()
-            ToastManager.instance.show('已发放技能点', {gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255)})
-        }, ()=>{
-            ToastManager.instance.show('视频播放中断', {gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255)})
+            ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+        }, () => {
+            ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
         })
     }
 
-    onBoomSkillClick(){
+    onBoomSkillClick() {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        if(DataManager.instance.skillNums[1] <= 0){
-            ToastManager.instance.show('技能点不足, 请先获取', {gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255)})
+        if (DataManager.instance.skillNums[1] <= 0) {
+            ToastManager.instance.show('Insufficient skills, Please get first', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
             return
         }
         this.hide()
         EventManager.instance.emit(ENUM_GAME_EVENT.ITEM_BOOM)
     }
 
-    onBoomRewardClick(){
+    onBoomRewardClick() {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        SdkManager.instance.showVideoAd(()=>{
+        SdkManager.instance.showVideoAd(() => {
             DataManager.instance.skillNums[1] += 1
             DataManager.instance.save()
             StaticInstance.uiManager.setMainPropNum()
-            ToastManager.instance.show('已发放技能点', {gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255)})
-        }, ()=>{
-            ToastManager.instance.show('视频播放中断', {gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255)})
+            ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+        }, () => {
+            ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
         })
     }
 }

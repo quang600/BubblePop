@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 252.96,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -456,8 +456,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "冻结道具",
-    "_N$string": "冻结道具",
+    "_string": "Freeze props",
+    "_N$string": "Freeze props",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -604,7 +604,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 260,
+      "width": 459.14,
       "height": 44.32
     },
     "_anchorPoint": {
@@ -656,8 +656,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "暂停泡泡往上增长",
-    "_N$string": "暂停泡泡往上增长",
+    "_string": "Pause bubble to grow upward",
+    "_N$string": "Pause bubble to grow upward",
     "_fontSize": 32,
     "_lineHeight": 32,
     "_enableWrapText": true,
@@ -875,7 +875,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 77.38,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -927,8 +927,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "使用",
-    "_N$string": "使用",
+    "_string": "Use",
+    "_N$string": "Use",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1212,7 +1212,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -51.813,
+        -64.813,
         0,
         0,
         0,
@@ -1310,7 +1310,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 130.66,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -1322,7 +1322,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        24.947,
+        28.947,
         0,
         0,
         0,
@@ -1362,8 +1362,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "获取",
-    "_N$string": "获取",
+    "_string": "Obtain",
+    "_N$string": "Obtain",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1959,7 +1959,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 239.55,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -2011,8 +2011,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "炸弹道具",
-    "_N$string": "炸弹道具",
+    "_string": "Bomb props",
+    "_N$string": "Bomb props",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2159,7 +2159,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 228,
+      "width": 382.66,
       "height": 44.32
     },
     "_anchorPoint": {
@@ -2211,8 +2211,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "用炸弹炸开泡泡",
-    "_N$string": "用炸弹炸开泡泡",
+    "_string": "Pop bubbles with bombs",
+    "_N$string": "Pop bubbles with bombs",
     "_fontSize": 32,
     "_lineHeight": 32,
     "_enableWrapText": true,
@@ -2384,7 +2384,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -2430,7 +2430,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 77.38,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -2482,8 +2482,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "使用",
-    "_N$string": "使用",
+    "_string": "Use",
+    "_N$string": "Use",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2712,7 +2712,7 @@
         1,
         1,
         1,
-        1
+        0
       ]
     },
     "_eulerAngles": {
@@ -2767,7 +2767,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -51.813,
+        -60.813,
         0,
         0,
         0,
@@ -2865,7 +2865,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 130.66,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -2877,7 +2877,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        24.947,
+        29.947,
         0,
         0,
         0,
@@ -2917,8 +2917,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "获取",
-    "_N$string": "获取",
+    "_string": "Obtain",
+    "_N$string": "Obtain",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,

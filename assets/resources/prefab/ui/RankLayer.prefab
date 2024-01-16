@@ -404,7 +404,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 124,
+      "width": 230.7,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -456,8 +456,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "排行榜",
-    "_N$string": "排行榜",
+    "_string": "Ranking list",
+    "_N$string": "Ranking list",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,

@@ -398,7 +398,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 413.04,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -450,8 +450,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "挑战成功",
-    "_N$string": "挑战成功",
+    "_string": "Challenge successful",
+    "_N$string": "Challenge successful",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
