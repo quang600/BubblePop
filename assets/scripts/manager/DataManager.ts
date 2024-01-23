@@ -11,7 +11,7 @@ export const SCREEN_B: number = 250;
 export const BUBBLE_R: number = 40;
 export const BUBBLE_Y: number = 40 * Math.sqrt(3);
 export const BUBBLE_NUM_0 = SCREEN_W / (BUBBLE_R * 2)
-export const BUBBLE_NUM_1 = SCREEN_W / (BUBBLE_R * 2) - 1 
+export const BUBBLE_NUM_1 = SCREEN_W / (BUBBLE_R * 2) - 1
 
 export interface IBubbleData {
     index: number,
@@ -72,53 +72,54 @@ export default class DataManager {
     skillNums: number[] = [1, 2]
     // 排行调试
     rankDebug: boolean = false
+    point: number = 0;
 
-    get level(){
+    get level() {
         return this._level
     }
 
-    set level(data: number){
+    set level(data: number) {
         this._level = data
     }
 
-    get maxLevel(){
+    get maxLevel() {
         return this._maxLevel
     }
 
-    set maxLevel(data: number){
+    set maxLevel(data: number) {
         this._maxLevel = data
     }
 
-    get isMusicOn(){
+    get isMusicOn() {
         return this._isMusicOn
     }
 
-    set isMusicOn(data: boolean){
+    set isMusicOn(data: boolean) {
         this._isMusicOn = data
     }
 
-    get isSoundOn(){
+    get isSoundOn() {
         return this._isSoundOn
     }
 
-    set isSoundOn(data: boolean){
+    set isSoundOn(data: boolean) {
         this._isSoundOn = data
     }
 
-    get maxScore(){
+    get maxScore() {
         return this._maxScore
     }
 
-    set maxScore(data: number){
+    set maxScore(data: number) {
         this._maxScore = data
     }
 
-    cutSkillNums(k: number){
+    cutSkillNums(k: number) {
         this.skillNums[k]--
         this.save()
     }
 
-    reset(){
+    reset() {
         this.status = ENUM_GAME_STATUS.UNRUNING
         this.bubbles = []
         this.readyBubbles = []
@@ -128,7 +129,7 @@ export default class DataManager {
         this.isIceTime = false
     }
 
-    save(){
+    save() {
         cc.sys.localStorage.setItem(STORAGE_KEY, JSON.stringify({
             level: this.level,
             maxLevel: this.maxLevel,
@@ -139,7 +140,7 @@ export default class DataManager {
         }))
     }
 
-    restore(){
+    restore() {
         const _data = cc.sys.localStorage.getItem(STORAGE_KEY) as any
         try {
             const data = JSON.parse(_data)
@@ -162,73 +163,73 @@ export default class DataManager {
     }
 
     // 舞台尺寸
-    setStageSize(){
+    setStageSize() {
         const size = cc.winSize
         SCREEN_H = size.height
         SCREEN_W = size.width
     }
 
     /** 传入二维数组行列，返回泡泡对应位置坐标 */
-    convertRowColToPos (row: number, col: number): cc.Vec2 {
+    convertRowColToPos(row: number, col: number): cc.Vec2 {
         let posX: number
         let posY: number = (SCREEN_H - SCREEN_T) - (BUBBLE_R + row * BUBBLE_Y);
         // 当前行情况（大小数）
         let isLargeNum = true
-        if(DataManager.instance.bubbles[row]){
-            if(DataManager.instance.bubbles[row].length == BUBBLE_NUM_1) isLargeNum = false
+        if (DataManager.instance.bubbles[row]) {
+            if (DataManager.instance.bubbles[row].length == BUBBLE_NUM_1) isLargeNum = false
         }
-        if(isLargeNum){
+        if (isLargeNum) {
             posX = BUBBLE_R + col * BUBBLE_R * 2
-        }else{
+        } else {
             posX = BUBBLE_R * 2 + col * BUBBLE_R * 2
         }
         return cc.v2(posX, posY);
     }
 
     /** 传入泡泡对应位置坐标，返回二维数组行列 */
-    convertPosToRowCol (posX: number, posY: number): cc.Vec2 {
+    convertPosToRowCol(posX: number, posY: number): cc.Vec2 {
         let col: number = Math.round((posX - BUBBLE_R) / (BUBBLE_R * 2))
         let row: number = Math.round(((SCREEN_H - SCREEN_T) - posY) / BUBBLE_Y);
         // 当前行情况（大小数）
         let isLargeNum = true
-        if(DataManager.instance.bubbles[row]){
-            if(DataManager.instance.bubbles[row].length == BUBBLE_NUM_1) isLargeNum = false
+        if (DataManager.instance.bubbles[row]) {
+            if (DataManager.instance.bubbles[row].length == BUBBLE_NUM_1) isLargeNum = false
         }
         // 小数行差一个半径
-        if(!isLargeNum) {
+        if (!isLargeNum) {
             col = Math.round((posX - BUBBLE_R * 2) / (BUBBLE_R * 2))
-            if(col <= 0) col = 0
+            if (col <= 0) col = 0
         }
         // 边界限制
         let maxCol = Math.abs(SCREEN_W / (BUBBLE_R * 2)) - 1
-        if(!isLargeNum){
-            if(col >= maxCol) col -= 1
+        if (!isLargeNum) {
+            if (col >= maxCol) col -= 1
             // console.log('边界限制', row, col)
         }
         // 切边情况
-        if(DataManager.instance.bubbles?.[row]?.[col]){
-            if(isLargeNum){
-                if(DataManager.instance.bubbleShootVector.x < 0){
+        if (DataManager.instance.bubbles?.[row]?.[col]) {
+            if (isLargeNum) {
+                if (DataManager.instance.bubbleShootVector.x < 0) {
                     // console.log('左切')
                     col += 1
-                }else{
+                } else {
                     // console.log('右切')
                     col -= 1
                 }
-            }else{
+            } else {
                 // console.log('切边')
-                if(col == 0 && posX <= BUBBLE_R * 2){
+                if (col == 0 && posX <= BUBBLE_R * 2) {
                     // console.log('左补上')
                     row += 1
-                }else if(col == maxCol - 1 && posX >= maxCol * BUBBLE_R * 2){
+                } else if (col == maxCol - 1 && posX >= maxCol * BUBBLE_R * 2) {
                     // console.log('右补上')
                     row += 1
                     col = maxCol
-                }else{
-                    if(DataManager.instance.bubbleShootVector.x < 0){
+                } else {
+                    if (DataManager.instance.bubbleShootVector.x < 0) {
                         // console.log('左切')
                         col += 1
-                    }else{
+                    } else {
                         // console.log('右切')
                         col -= 1
                     }
@@ -237,10 +238,10 @@ export default class DataManager {
             // console.log('切边补上', row, col)
         }
         // 修复重叠
-        while(DataManager.instance.bubbles?.[row]?.[col]){
+        while (DataManager.instance.bubbles?.[row]?.[col]) {
             row += 1
-            if(DataManager.instance.bubbles[row].length == BUBBLE_NUM_1){
-                if(col >= maxCol) col = maxCol - 1
+            if (DataManager.instance.bubbles[row].length == BUBBLE_NUM_1) {
+                if (col >= maxCol) col = maxCol - 1
             }
         }
         // console.log(col, row, isLargeNum)

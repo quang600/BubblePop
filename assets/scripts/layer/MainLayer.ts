@@ -54,6 +54,8 @@ export default class MainLayer extends BaseLayer {
             .to(0.2, { scale: 1 })
             .to(0.2, { scale: 1.2 })
             .to(0.2, { scale: 1 }).start()
+
+        DataManager.instance.point = score;
     }
 
     // 设置技能点数
