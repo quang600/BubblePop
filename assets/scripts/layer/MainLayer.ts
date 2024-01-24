@@ -33,13 +33,15 @@ export default class MainLayer extends BaseLayer {
     }
 
     setLevelLabel() {
-        this.level.string = `First${DataManager.instance.level}close`
+        // this.level.string = `First${DataManager.instance.level}close`
     }
 
     setScoreLabel(score: number) {
         if (score !== 0) {
             let old: any = this.score.string
-            if (DataManager.instance.combo > 1) score *= DataManager.instance.combo
+            if (score > 0) {
+                if (DataManager.instance.combo > 1) score *= DataManager.instance.combo
+            }
             score += old * 1
             if (score > DataManager.instance.maxScore) {
                 DataManager.instance.maxScore = score

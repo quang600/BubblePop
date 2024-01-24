@@ -32,12 +32,15 @@ export default class GameManager extends cc.Component {
 
     onLoad() {
         // 注册事件
+        StaticInstance.setGameManager(this);
         EventManager.instance.on(ENUM_GAME_EVENT.GAME_START, this.onGameStart, this)
         EventManager.instance.on(ENUM_GAME_EVENT.BALL_SHOOT, this.onBallShoot, this)
         EventManager.instance.on(ENUM_GAME_EVENT.ITEM_BOOM, this.onItemBoom, this)
         EventManager.instance.on(ENUM_GAME_EVENT.ITEM_ICE_START, this.onItemIce, this)
         EventManager.instance.on(ENUM_GAME_EVENT.ITEM_ICE_END, this.onItemIceEnd, this)
+        DataManager.instance.revival = false;
     }
+
 
     // 开始游戏
     onGameStart() {
@@ -363,7 +366,7 @@ export default class GameManager extends cc.Component {
     }
 
     // 场景泡泡递增
-    private onBubbleIncrease() {
+    onBubbleIncrease() {
         if (!this.currentLevel.isIncrease) {
             this.onGameCheck()
             return
@@ -416,9 +419,16 @@ export default class GameManager extends cc.Component {
             for (let col = 0; col < DataManager.instance.bubbles[row].length; col++) {
                 if (DataManager.instance.bubbles?.[row]?.[col]) {
                     const bubble = DataManager.instance.bubbles[row][col]
+                    let pos;
+                    if (DataManager.instance.revival == true) {
+                        pos = cc.v2(bubble.node.x, bubble.node.y + BUBBLE_Y * 5);
+
+                    } else {
+                        pos = cc.v2(bubble.node.x, bubble.node.y - BUBBLE_Y);
+                    }
                     const action = cc.spawn(
                         cc.scaleTo(0.05, 0.95),
-                        cc.jumpTo(0.3, cc.v2(bubble.node.x, bubble.node.y - BUBBLE_Y), 50, 1),
+                        cc.jumpTo(0.3, pos, 50, 1),
                         cc.scaleTo(0.05, 1)
                     );
                     cc.tween(bubble.node).then(action).call(() => {
@@ -427,9 +437,16 @@ export default class GameManager extends cc.Component {
                             this.onGameCheck()
                         }
                     }).start()
+                    // console.log("col", DataManager.instance.bubbles);
+                    // console.log("DataManager.instance.bubbles[row]", DataManager.instance.bubbles[row]);
                 }
             }
         }
+        if (DataManager.instance.revival == true) {
+            console.log('splice');
+            DataManager.instance.bubbles.splice(0, 6);
+        }
+        console.log(DataManager.instance.bubbles);
     }
 
     // 游戏情况检查

@@ -18,13 +18,9 @@ export default class RewardLayer extends BaseLayer {
     @property(cc.Node)
     styleNode: cc.Node = null
 
-    @property(cc.Node)
-    effReward: cc.Node = null
-
     point: number = 0;
 
     onCloseClick(e: any) {
-        this.effReward.active = false;
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         this.hide()
     }
@@ -63,18 +59,22 @@ export default class RewardLayer extends BaseLayer {
     onIcelRewardClick() {
         this.point = DataManager.instance.point;
         if (this.point > 100) {
+            DataManager.instance.point = DataManager.instance.point - 100;
+            StaticInstance.uiManager.setMainScoreLabel(-100);
+
             HttpManager.sendHttpPostRequest("ICE", "packageice100pointgameid100");
             AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
             SdkManager.instance.showVideoAd(() => {
                 DataManager.instance.skillNums[0] += 1
                 DataManager.instance.save()
                 StaticInstance.uiManager.setMainPropNum()
-                ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
             }, () => {
-                ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
             })
         } else {
-            this.effReward.active = true;
+            ToastManager.instance.show("You don't have enough points!!", { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+            return
         }
     }
 
@@ -91,18 +91,22 @@ export default class RewardLayer extends BaseLayer {
     onBoomRewardClick() {
         this.point = DataManager.instance.point;
         if (this.point > 100) {
+            DataManager.instance.point = DataManager.instance.point - 100;
+            StaticInstance.uiManager.setMainScoreLabel(-100);
+
             HttpManager.sendHttpPostRequest("BOMB", "packagebomb100pointgameid100");
             AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
             SdkManager.instance.showVideoAd(() => {
                 DataManager.instance.skillNums[1] += 1
                 DataManager.instance.save()
                 StaticInstance.uiManager.setMainPropNum()
-                ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
             }, () => {
-                ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
             })
         } else {
-            this.effReward.active = true;
+            ToastManager.instance.show("You don't have enough points!!", { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+            return
         }
     }
 }

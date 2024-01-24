@@ -13,10 +13,7 @@ export default class HttpManager extends cc.Component {
 
         const requestData = {
             clientId: "3ca742915ebae381ce660aee7faa18b41705999217977",
-            productId: {
-                "name": name,
-                "productId": productId
-            }
+            productId: productId
         };
 
         // Tạo đối tượng XMLHttpRequest
@@ -27,6 +24,7 @@ export default class HttpManager extends cc.Component {
 
         // Thiết lập tiêu đề cho yêu cầu (nếu cần thiết)
         xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInJvbGUiOiJFTkRfVVNFUiIsImlhdCI6MTcwNjA4MTE2NiwiZXhwIjo5MDAxNzA2MDgxMTY2fQ.LVoOAM1cvSDZ5WaBectUhNS6DEp6FZaZnFIFkcQERpM");
 
         // Xử lý sự kiện khi yêu cầu được gửi đi
         xhr.onreadystatechange = () => {

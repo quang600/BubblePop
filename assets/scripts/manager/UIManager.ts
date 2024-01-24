@@ -8,6 +8,7 @@ import SettingLayer from '../layer/SettingLayer';
 import MainLayer from '../layer/MainLayer';
 import ComboLayer from '../layer/ComboLayer';
 import RewardLayer from '../layer/RewardLayer';
+import { sort } from '../Utils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -56,6 +57,8 @@ export default class UIManager extends cc.Component {
     }
 
     setMainScoreLabel(score: number = 0) {
+        console.log("score Ui manager: ", score);
+
         const layer: MainLayer = this.uiMap.get(ENUM_UI_TYPE.MAIN) as MainLayer
         layer?.setScoreLabel(score)
     }

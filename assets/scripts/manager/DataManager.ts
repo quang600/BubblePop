@@ -73,6 +73,7 @@ export default class DataManager {
     // 排行调试
     rankDebug: boolean = false
     point: number = 0;
+    revival: Boolean = false;
 
     get level() {
         return this._level
