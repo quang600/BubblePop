@@ -72,8 +72,13 @@ export default class DataManager {
     skillNums: number[] = [1, 2]
     // 排行调试
     rankDebug: boolean = false
-    point: number = 0;
+
     revival: Boolean = false;
+    http: string = 'http://103.23.135.57:7880/v1/api';
+    packagebuy: string = '/game_package/buy';
+    userInfo: string = '/user/info';
+    pointPortal: number;
+    msgPortal: string;
 
     get level() {
         return this._level

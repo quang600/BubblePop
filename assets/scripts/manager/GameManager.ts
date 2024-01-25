@@ -14,6 +14,7 @@ import AudioManager from './AudioManager';
 import { StaticInstance } from '../StaticInstance';
 import Fall from '../Fall';
 import ToastManager from './ToastManager';
+import HttpManager from './HTTPManager';
 
 @ccclass
 export default class GameManager extends cc.Component {
@@ -33,6 +34,7 @@ export default class GameManager extends cc.Component {
     onLoad() {
         // 注册事件
         StaticInstance.setGameManager(this);
+        HttpManager.sendHttpGetRequest();
         EventManager.instance.on(ENUM_GAME_EVENT.GAME_START, this.onGameStart, this)
         EventManager.instance.on(ENUM_GAME_EVENT.BALL_SHOOT, this.onBallShoot, this)
         EventManager.instance.on(ENUM_GAME_EVENT.ITEM_BOOM, this.onItemBoom, this)
@@ -47,6 +49,7 @@ export default class GameManager extends cc.Component {
         DataManager.instance.reset()
         this.bubbleRoot.removeAllChildren()
         this.initGame()
+        console.log("point portal=-=-=-=-=-=-=-=-=-=-=: ", DataManager.instance.pointPortal);
     }
 
     onBallShoot() {

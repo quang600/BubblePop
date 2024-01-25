@@ -57,25 +57,20 @@ export default class RewardLayer extends BaseLayer {
     // }]
 
     onIcelRewardClick() {
-        this.point = DataManager.instance.point;
-        if (this.point > 100) {
-            DataManager.instance.point = DataManager.instance.point - 100;
-            StaticInstance.uiManager.setMainScoreLabel(-100);
+        HttpManager.sendHttpPostRequest("ICE", "packageice100pointgameid100");
+        AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
+        SdkManager.instance.showVideoAd(() => {
+            DataManager.instance.skillNums[0] += 1
+            DataManager.instance.save()
+            StaticInstance.uiManager.setMainPropNum()
+            // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+        }, () => {
+            // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        })
 
-            HttpManager.sendHttpPostRequest("ICE", "packageice100pointgameid100");
-            AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-            SdkManager.instance.showVideoAd(() => {
-                DataManager.instance.skillNums[0] += 1
-                DataManager.instance.save()
-                StaticInstance.uiManager.setMainPropNum()
-                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
-            }, () => {
-                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            })
-        } else {
-            ToastManager.instance.show("You don't have enough points!!", { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            return
-        }
+        ToastManager.instance.show(DataManager.instance.msgPortal, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        return
+
     }
 
     onBoomSkillClick() {
@@ -89,24 +84,20 @@ export default class RewardLayer extends BaseLayer {
     }
 
     onBoomRewardClick() {
-        this.point = DataManager.instance.point;
-        if (this.point > 100) {
-            DataManager.instance.point = DataManager.instance.point - 100;
-            StaticInstance.uiManager.setMainScoreLabel(-100);
 
-            HttpManager.sendHttpPostRequest("BOMB", "packagebomb100pointgameid100");
-            AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-            SdkManager.instance.showVideoAd(() => {
-                DataManager.instance.skillNums[1] += 1
-                DataManager.instance.save()
-                StaticInstance.uiManager.setMainPropNum()
-                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
-            }, () => {
-                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            })
-        } else {
-            ToastManager.instance.show("You don't have enough points!!", { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            return
-        }
+        HttpManager.sendHttpPostRequest("BOMB", "packagebomb100pointgameid100");
+        AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
+        SdkManager.instance.showVideoAd(() => {
+            DataManager.instance.skillNums[1] += 1
+            DataManager.instance.save()
+            StaticInstance.uiManager.setMainPropNum()
+            // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+        }, () => {
+            // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        })
+
+        ToastManager.instance.show(DataManager.instance.msgPortal, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        return
+
     }
 }

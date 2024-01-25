@@ -35,30 +35,25 @@ export default class LoseLayer extends BaseLayer {
     }
 
     onBuyClick() {
-        this.point = DataManager.instance.point;
-        if (this.point > 150) {
-            DataManager.instance.revival = true;
 
-            DataManager.instance.point = DataManager.instance.point - 150;
-            StaticInstance.uiManager.setMainScoreLabel(-150);
-            StaticInstance.gameManager.onBubbleIncrease();
+        StaticInstance.gameManager.onBubbleIncrease();
 
-            HttpManager.sendHttpPostRequest("REVIVE", "packagerevive150pointgameid100");
-            AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-            SdkManager.instance.showVideoAd(() => {
-                DataManager.instance.skillNums[1] += 1
-                DataManager.instance.save()
-                StaticInstance.uiManager.setMainPropNum()
-                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
-            }, () => {
-                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            })
-            this.close();
-        } else {
-            ToastManager.instance.show("You don't have enough points!!", { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-            return
-        }
+        HttpManager.sendHttpPostRequest("REVIVE", "packagerevive150pointgameid100");
+        AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
+        SdkManager.instance.showVideoAd(() => {
+            DataManager.instance.skillNums[1] += 1
+            DataManager.instance.save()
+            StaticInstance.uiManager.setMainPropNum()
+            // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+        }, () => {
+            // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        })
+        this.close();
         DataManager.instance.revival = false;
+
+        ToastManager.instance.show(DataManager.instance.msgPortal, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        return
+
     }
 
     close() {
