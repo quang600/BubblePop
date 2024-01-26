@@ -13,6 +13,7 @@ export enum ENUM_GAME_EVENT {
     ITEM_BOOM = 'ITEM_BOOM',
     ITEM_ICE_START = 'ITEM_ICE_START',
     ITEM_ICE_END = 'ITEM_ICE_END',
+    PURCHASE_RESPONSE = 'PURCHASE_RESPONSE'
 }
 
 // 音效
@@ -57,9 +58,9 @@ export enum ENUM_UI_TYPE {
 
 // 资源
 export const ENUM_RESOURCE_TYPE = ({
-    AUDIO: {type: cc.AudioClip, path: 'audio'},
-    PREFAB: {type: cc.Prefab, path: 'prefab'},
-    SPRITE: {type: cc.SpriteFrame, path: 'sprite'}
+    AUDIO: { type: cc.AudioClip, path: 'audio' },
+    PREFAB: { type: cc.Prefab, path: 'prefab' },
+    SPRITE: { type: cc.SpriteFrame, path: 'sprite' }
 })
 
 // 射线检测

@@ -2,9 +2,10 @@
 
 import { ENUM_AUDIO_CLIP, ENUM_GAME_EVENT, ENUM_GAME_STATUS, ENUM_UI_TYPE } from "../Enum";
 import AudioManager from "../manager/AudioManager";
+import CGManager from "../manager/CGManager";
 import DataManager from "../manager/DataManager";
 import EventManager from "../manager/EventManager";
-import HttpManager from "../manager/HTTPManager";
+// import HttpManager from "../manager/HTTPManager";
 import SdkManager from "../manager/SdkManager";
 import ToastManager from "../manager/ToastManager";
 import { StaticInstance } from "../StaticInstance";
@@ -19,7 +20,25 @@ export default class RewardLayer extends BaseLayer {
     styleNode: cc.Node = null
 
     point: number = 0;
+    productId: string;
 
+    protected onLoad(): void {
+        EventManager.instance.on(ENUM_GAME_EVENT.PURCHASE_RESPONSE, this.onPurchaseResponse, this);
+    }
+
+    onPurchaseResponse(data) {
+        console.log('onPurchaseResponse', data);
+        ToastManager.instance.show(data.message, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+        if (data.code == 200) {
+            if (this.productId == "packageice100pointgameid100") {
+                DataManager.instance.skillNums[0] += 1;
+            } else {
+                DataManager.instance.skillNums[1] += 1;
+            }
+            DataManager.instance.save();
+            StaticInstance.uiManager.setMainPropNum();
+        }
+    }
     onCloseClick(e: any) {
         AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
         this.hide()
@@ -57,19 +76,17 @@ export default class RewardLayer extends BaseLayer {
     // }]
 
     onIcelRewardClick() {
-        HttpManager.sendHttpPostRequest("ICE", "packageice100pointgameid100");
-        AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        SdkManager.instance.showVideoAd(() => {
-            DataManager.instance.skillNums[0] += 1
-            DataManager.instance.save()
-            StaticInstance.uiManager.setMainPropNum()
-            // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
-        }, () => {
-            // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-        })
+        this.productId = "packageice100pointgameid100"
+        CGManager.Instance.purchaseItem(this.productId, () => {
 
-        ToastManager.instance.show(DataManager.instance.msgPortal, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-        return
+            AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
+            SdkManager.instance.showVideoAd(() => {
+                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+            }, () => {
+                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+            })
+            return
+        })
 
     }
 
@@ -84,20 +101,17 @@ export default class RewardLayer extends BaseLayer {
     }
 
     onBoomRewardClick() {
+        this.productId = "packagebomb100pointgameid100"
+        CGManager.Instance.purchaseItem(this.productId, () => {
 
-        HttpManager.sendHttpPostRequest("BOMB", "packagebomb100pointgameid100");
-        AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
-        SdkManager.instance.showVideoAd(() => {
-            DataManager.instance.skillNums[1] += 1
-            DataManager.instance.save()
-            StaticInstance.uiManager.setMainPropNum()
-            // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
-        }, () => {
-            // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+            AudioManager.instance.playSound(ENUM_AUDIO_CLIP.CLICK)
+            SdkManager.instance.showVideoAd(() => {
+                // ToastManager.instance.show('Skills point for distributed', { gravity: 'BOTTOM', bg_color: cc.color(102, 202, 28, 255) })
+            }, () => {
+                // ToastManager.instance.show('Video playback interruption', { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
+            })
+            return
         })
-
-        ToastManager.instance.show(DataManager.instance.msgPortal, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-        return
 
     }
 }

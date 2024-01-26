@@ -1,3 +1,6 @@
+import { ENUM_GAME_EVENT } from "../Enum";
+import DataManager from "./DataManager";
+import EventManager from "./EventManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -98,6 +101,8 @@ export default class CGManager extends cc.Component {
             this.setUnresolvedCode(transactionIds);
         }
 
+        // DataManager.instance.msgPortal = response.message;
+        EventManager.instance.emit(ENUM_GAME_EVENT.PURCHASE_RESPONSE, response);
     }
     //** lấy danh sách transaction chưa được xử lý ở client về để xử lý và update lại lên server, tránh trường hợp bị package loss*/
     public async getUnresolvedCode(packageID, callback: Function = null) {
