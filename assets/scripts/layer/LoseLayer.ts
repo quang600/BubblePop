@@ -35,6 +35,7 @@ export default class LoseLayer extends BaseLayer {
     }
 
     onBuyClick() {
+        DataManager.instance.revival = true;
 
         StaticInstance.gameManager.onBubbleIncrease();
 

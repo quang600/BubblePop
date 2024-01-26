@@ -114,12 +114,23 @@ export default class GameManager extends cc.Component {
         const data = this.currentLevel['data']
         if (data.length) {
             // 将所有数据遍历，0代表空
+            console.log("datdaa=-=-=-=-=-=-=-=: ", data);
+
             for (let row = 0; row < data.length; row++) {
                 const arr = new Array(data[row].length)
+                console.log("arr=-=-=: ", arr);
+
                 arr.fill(null)
+                console.log("arr fill=-=-=: ", arr);
+
                 DataManager.instance.bubbles[row] = arr;
+                console.log("DataManager.instance.bubbles[row]: ", DataManager.instance.bubbles[row]);
+
                 for (let col = 0; col < data[row].length; col++) {
                     let index = data[row][col];
+                    console.log("data=-=-=--=--:", data[row][col]);
+                    console.log("index=-=-=--=--:", index);
+
                     if (index === 0) {
                         DataManager.instance.bubbles[row][col] = null
                         continue
@@ -425,9 +436,12 @@ export default class GameManager extends cc.Component {
                     let pos;
                     if (DataManager.instance.revival == true) {
                         pos = cc.v2(bubble.node.x, bubble.node.y + BUBBLE_Y * 5);
+                        console.log("revival=-=-=---=-=-====-=-==-=-=-=-=-=-=-=-");
 
                     } else {
                         pos = cc.v2(bubble.node.x, bubble.node.y - BUBBLE_Y);
+                        console.log("revival falseeeeeeee=-=-=---=-=-====-=-==-=-=-=-=-=-=-=-");
+
                     }
                     const action = cc.spawn(
                         cc.scaleTo(0.05, 0.95),
