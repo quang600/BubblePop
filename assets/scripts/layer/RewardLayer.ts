@@ -19,11 +19,18 @@ export default class RewardLayer extends BaseLayer {
     @property(cc.Node)
     styleNode: cc.Node = null
 
+    @property(cc.Node)
+    closeWV: cc.Node = null
+
+    @property(cc.WebView)
+    webViewNode: cc.WebView = null
+
     point: number = 0;
     productId: string;
 
     protected onLoad(): void {
         EventManager.instance.on(ENUM_GAME_EVENT.PURCHASE_RESPONSE, this.onPurchaseResponse, this);
+        this.closeWebView();
     }
 
     onPurchaseResponse(data) {
@@ -37,6 +44,13 @@ export default class RewardLayer extends BaseLayer {
             }
             DataManager.instance.save();
             StaticInstance.uiManager.setMainPropNum();
+        }
+        console.log("data=-=-==-==-", data.data.transactionInfo.topupUrl);
+
+        if (data.code == 10011 && data.message == 'Not enough point') {
+            this.webViewNode.url = data.data.transactionInfo.topupUrl;
+            this.webViewNode.node.active = true;
+            this.closeWV.active = true;
         }
     }
     onCloseClick(e: any) {
@@ -113,5 +127,10 @@ export default class RewardLayer extends BaseLayer {
             return
         })
 
+    }
+
+    closeWebView() {
+        this.webViewNode.node.active = false;
+        this.closeWV.active = false;
     }
 }
