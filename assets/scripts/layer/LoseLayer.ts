@@ -17,17 +17,24 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class LoseLayer extends BaseLayer {
 
+    @property(cc.Node)
+    closeWV: cc.Node = null
+
+    @property(cc.WebView)
+    webViewNode: cc.WebView = null
+
     point: number = 0;
 
     protected onLoad(): void {
-        EventManager.instance.on(ENUM_GAME_EVENT.PURCHASE_RESPONSE, this.onPurchaseResponse, this)
+        EventManager.instance.on(ENUM_GAME_EVENT.PURCHASE_RESPONSE, this.onPurchaseResponse, this);
+        this.closeWebView();
     }
 
     onPurchaseResponse(data) {
         console.log("data message revival", data.message);
 
         ToastManager.instance.show(data.message, { gravity: 'BOTTOM', bg_color: cc.color(226, 69, 109, 255) })
-        if (data.code == 200) {
+        if (data.code == 200 && data.data.transactionInfo.name == "REVIVE") {
             DataManager.instance.revival = true;
             StaticInstance.gameManager.onBubbleIncrease();
             DataManager.instance.save()
@@ -35,6 +42,13 @@ export default class LoseLayer extends BaseLayer {
             this.close();
         }
         DataManager.instance.revival = false;
+        let url = data.data.transactionInfo.topupUrl;
+        let userId = data.data.transactionInfo.userId;
+        if (data.code == 10011 && data.message == 'Not enough point') {
+            this.webViewNode.url = `${url}?portalUserId=${userId}`;
+            this.webViewNode.node.active = true;
+            this.closeWV.active = true;
+        }
     }
 
     protected onEnable(): void {
@@ -74,6 +88,10 @@ export default class LoseLayer extends BaseLayer {
 
     close() {
         this.hide();
+    }
 
+    closeWebView() {
+        this.webViewNode.node.active = false;
+        this.closeWV.active = false;
     }
 }

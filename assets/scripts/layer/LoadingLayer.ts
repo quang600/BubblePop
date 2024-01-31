@@ -17,7 +17,8 @@ export default class LoadingLayer extends BaseLayer {
     protected async start() {
         const res = await CGManager.Instance.init();
         if (res) {
-            await CGManager.Instance.loadData()
+            await CGManager.Instance.loadData();
+            await CGManager.Instance.getUserInfo();
         }
 
         const data = {

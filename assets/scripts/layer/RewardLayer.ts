@@ -45,10 +45,11 @@ export default class RewardLayer extends BaseLayer {
             DataManager.instance.save();
             StaticInstance.uiManager.setMainPropNum();
         }
-        console.log("data=-=-==-==-", data.data.transactionInfo.topupUrl);
-
+        console.log("data=-=-==-==-", data.data.transactionInfo);
+        let url = data.data.transactionInfo.topupUrl;
+        let userId = data.data.transactionInfo.userId;
         if (data.code == 10011 && data.message == 'Not enough point') {
-            this.webViewNode.url = data.data.transactionInfo.topupUrl;
+            this.webViewNode.url = `${url}?portalUserId=${userId}`;
             this.webViewNode.node.active = true;
             this.closeWV.active = true;
         }

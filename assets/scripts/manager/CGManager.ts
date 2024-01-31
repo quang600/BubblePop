@@ -66,6 +66,14 @@ export default class CGManager extends cc.Component {
         }
     }
 
+    public async getUserInfo() {
+        let data = null;
+        let response = await this.callAPI("GET", data, "/user/info", null, true);
+        console.warn("getUserInfo", response)
+
+        return response
+    }
+
     /** get data game đã lưu ở server*/
     public async loadData() {
         let response = await this.callAPI("GET", {}, "/user/gameData", null, true)
