@@ -33,7 +33,7 @@ export default class MainLayer extends BaseLayer {
     }
 
     setLevelLabel() {
-        // this.level.string = `First${DataManager.instance.level}close`
+        this.level.string = "Level " + DataManager.instance.level;
     }
 
     setScoreLabel(score: number) {
