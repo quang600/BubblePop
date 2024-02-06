@@ -8,7 +8,7 @@ import DataManager from './manager/DataManager';
 import ResourceManager from "./manager/ResourceManager";
 import SdkManager from './manager/SdkManager';
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Index extends cc.Component {
@@ -18,9 +18,10 @@ export default class Index extends cc.Component {
         // 物理碰撞系统
         cc.director.getPhysicsManager().enabled = true
         // cc.director.getPhysicsManager().debugDrawFlags = 1
+        cc.view.setResizeCallback(this.onResize.bind(this));
     }
 
-    async start(){
+    async start() {
         // 加载资源
         await ResourceManager.instance.loadRes(ENUM_RESOURCE_TYPE.AUDIO, 0.6)
         await ResourceManager.instance.loadRes(ENUM_RESOURCE_TYPE.PREFAB, 0.4)
@@ -41,5 +42,11 @@ export default class Index extends cc.Component {
         SdkManager.instance.initVideoAd()
         // 操作ui
         StaticInstance.uiManager.toggle(ENUM_UI_TYPE.MENU)
+    }
+
+    onResize() {
+        // Xử lý khi màn hình thay đổi kích thước
+        DataManager.instance.setStageSize()
+        console.log(`Màn hình đã thay đổi kích thước: `);
     }
 }
